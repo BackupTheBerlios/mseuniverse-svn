@@ -52,36 +52,87 @@ implementation
 uses
  main_mfm;
  
-{tmainfo }
+{ tmainfo }
 
 procedure tmainfo.initdata(const sender: TObject);
+var
+ node1: tmynode;
 begin
- treeedit.itemlist.add(tmynode.create); //root nodes
- treeedit.itemlist.add(tmynode.create); 
- with tmynode(treeedit[0]) do begin
-  caption:= 'AAAAA';
-  add(3,tmynode);
-  items[0].caption:= 'A0';
-  items[1].caption:= 'A1';
-  items[2].caption:= 'A2';
- end;
- with tmynode(treeedit[1]) do begin
-  caption:= 'BBBBBBBBBB';
-  add(5,tmynode);
-  items[0].caption:= 'BB0';
-  items[1].caption:= 'B1';
-  with tmynode(items[1]) do begin
-   add(5,tmynode);
-   items[0].caption:= 'B1a';
-   items[1].caption:= 'B1b';
-   items[2].caption:= 'B1c';
-   items[3].caption:= 'B1d';
-   items[4].caption:= 'B1e';
+
+ node1:= tmynode.create;  //first root node
+ with node1 do begin
+  caption:= 'A';
+  str:= mselowercase(caption);
+  int:= parentindex;  
+  with tmynode(add(tmynode)) do begin
+   caption:= 'AA';  
+   str:= mselowercase(caption);
+   int:= parentindex;
+  end;  
+  with tmynode(add(tmynode)) do begin
+   caption:= 'AB';
+   str:= mselowercase(caption);
+   int:= parentindex;
+   with tmynode(add(tmynode)) do begin
+    caption:= 'ABA';
+    str:= mselowercase(caption);
+    int:= parentindex;
+   end;
   end;
-  items[2].caption:= 'BBBBBB2';
-  items[3].caption:= 'B3';
-  items[4].caption:= 'B4';
+  with tmynode(add(tmynode)) do begin
+   caption:= 'AC';
+   str:= mselowercase(caption);
+   int:= parentindex;
+  end;
+  with tmynode(add(tmynode)) do begin
+   caption:= 'AD';
+   str:= mselowercase(caption);
+   int:= parentindex;
+  end;
  end;
+ treeedit.itemlist.add(node1); //itemlist owns the item
+ 
+ node1:= tmynode.create;  //second root node
+ with node1 do begin
+  caption:= 'B';
+  str:= mselowercase(caption);
+  int:= parentindex;  
+  with tmynode(add(tmynode)) do begin
+   caption:= 'BA';
+   str:= mselowercase(caption);
+   int:= parentindex;
+  end;  
+  with tmynode(add(tmynode)) do begin
+   caption:= 'BC';
+   str:= mselowercase(caption);
+   int:= parentindex;
+  end;
+  with tmynode(add(tmynode)) do begin
+   caption:= 'BD';
+   str:= mselowercase(caption);
+   int:= parentindex;
+  end;
+  with tmynode(add(tmynode)) do begin
+   caption:= 'BE';
+   str:= mselowercase(caption);
+   int:= parentindex; 
+  end;
+  add(5,tmynode);
+  items[4].caption:= 'BF';
+  items[5].caption:= 'BG';
+  with tmynode(items[6]) do begin
+   caption:= 'BH';
+   add(5,tmynode);
+   items[0].caption:= 'BHA';
+   items[1].caption:= 'BHB';
+   items[2].caption:= 'BHC';
+   items[3].caption:= 'BHD';
+   items[4].caption:= 'BHE';
+  end;
+  items[7].caption:= 'BI';
+  items[8].caption:= 'BJ';
+ end;
+ treeedit.itemlist.add(node1); //itemlist owns the item
 end;
 
 procedure tmainfo.updaterowvalues(const sender: TObject; const aindex: Integer;
